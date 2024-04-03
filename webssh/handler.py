@@ -287,7 +287,7 @@ class MixinHandler(object):
     def get_real_client_addr(self):
         ip = self.request.remote_ip
 
-        if ip == self.request.headers.get('X-Real-Ip'):
+        if ip == self.request.headers.get('X-Real-IP'):
             port = self.request.headers.get('X-Real-Port')
         elif ip in self.request.headers.get('X-Forwarded-For', ''):
             port = self.request.headers.get('X-Forwarded-Port')
