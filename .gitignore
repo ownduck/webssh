@@ -63,3 +63,7 @@ target/
 
 # known_hosts file
 known_hosts
+
+.idea
+*.tar
+*.tar.gz

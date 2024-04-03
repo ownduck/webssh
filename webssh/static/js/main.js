@@ -179,7 +179,7 @@ jQuery(function($){
     }
 
     var cols = parseInt(window.innerWidth / style.width, 10) - 1;
-    var rows = parseInt(window.innerHeight / style.height, 10);
+    var rows = parseInt(window.innerHeight / style.height, 10) - 1;
     return {'cols': cols, 'rows': rows};
   }
 
