@@ -71,7 +71,7 @@ jQuery(function($){
       name = names[i];
       value = data.get(name);
       if (value){
-        window.localStorage.setItem(name, value);
+        window.localStorage.setItem('webssh_'+name, value);
       }
     }
   }
@@ -82,7 +82,7 @@ jQuery(function($){
 
     for (i=0; i < names.length; i++) {
       name = names[i];
-      value = window.localStorage.getItem(name);
+      value = window.localStorage.getItem('webssh_'+name);
       if (value) {
         $('#'+name).val(value);
       }
