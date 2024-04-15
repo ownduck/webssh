@@ -538,6 +538,19 @@ jQuery(function($){
           sock.send(JSON.stringify({'data': url_opts_data.command+'\r'}));
         }, 500);
       }
+
+      let heartbeat_interval = sessionStorage.getItem("webssh_heartbeat_interval")
+      if (heartbeat_interval){
+        clearInterval(Number(heartbeat_interval))
+      }
+      heartbeat_interval = setInterval(function () {
+        if (sock == undefined){
+          clearInterval(heartbeat_interval)
+        }else{
+          sock.send(JSON.stringify({'type': 'heartBeat\r'}));
+        }
+      }, 24000);
+      sessionStorage.setItem("webssh_heartbeat_interval",heartbeat_interval)
     };
 
     sock.onmessage = function(msg) {
@@ -546,6 +559,11 @@ jQuery(function($){
 
     sock.onerror = function(e) {
       console.error(e);
+
+      let heartbeat_interval = sessionStorage.getItem("webssh_heartbeat_interval")
+      if (heartbeat_interval){
+        clearInterval(Number(heartbeat_interval))
+      }
     };
 
     sock.onclose = function(e) {
@@ -557,6 +575,11 @@ jQuery(function($){
       state = DISCONNECTED;
       default_title = 'WebSSH';
       title_element.text = default_title;
+
+      let heartbeat_interval = sessionStorage.getItem("webssh_heartbeat_interval")
+      if (heartbeat_interval){
+        clearInterval(Number(heartbeat_interval))
+      }
     };
 
     $(window).resize(function(){
